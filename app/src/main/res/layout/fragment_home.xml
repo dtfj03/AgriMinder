@@ -3,4 +3,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragment"/>
+    tools:context=".HomeFragment">
+
+    <CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="60dp" />
+
+    <LinearLayout
+        android:id="@+id/home_reminders"
+        android:layout_width="350dp"
+        android:layout_height="400dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="400dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/reminderTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="REMINDERS" />
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Reminder 1" />
+    </LinearLayout>
+
+
+</FrameLayout>
