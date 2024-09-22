@@ -30,6 +30,11 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        // Load the default fragment
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+        }
+
         // Handle navigation item selection
         binding.navBar.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
