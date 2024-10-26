@@ -33,12 +33,10 @@ public class ReminderFragment extends Fragment {
 
         // Set the click listener for the addReminder button
         addReminderButton.setOnClickListener(v -> {
-            FragmentManager fragmentManager = getParentFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, new AddReminderFragment());
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit();
+            AddReminderFragment dialogFragment = new AddReminderFragment();
+            dialogFragment.show(getParentFragmentManager(), "AddReminderFragment");
         });
+
 
         // Fetch and display reminders
         displayReminders();

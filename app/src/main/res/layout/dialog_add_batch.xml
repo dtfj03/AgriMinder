@@ -1,0 +1,30 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/batchNameInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Batch Name"/>
+
+    <EditText
+        android:id="@+id/batchTypeInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Batch Type"/>
+
+    <EditText
+        android:id="@+id/batchDOBInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Batch Date of Birth"/>
+
+    <Button
+        android:id="@+id/saveBatchButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save Batch"/>
+</LinearLayout>

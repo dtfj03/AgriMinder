@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
                 replaceFragment(new ReminderFragment());
             } else if (itemId == R.id.menu_calendar) {
                 replaceFragment(new CalendarFragment());
+            } else if (itemId == R.id.menu_batch) {
+                replaceFragment(new BatchFragment());
             }
 
             return true;

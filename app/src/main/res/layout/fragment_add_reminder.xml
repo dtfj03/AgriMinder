@@ -2,57 +2,61 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".AddReminderFragment">
 
     <TextView
         android:id="@+id/TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
         android:text="Add a New Reminder"
-        android:textSize="24sp" />
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:id="@+id/newReminder"
-        android:layout_width="wrap_content"
+        android:layout_width="355dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:orientation="vertical">
 
         <EditText
             android:id="@+id/addReminderTitle"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:inputType="text"
-            android:hint="Reminder Title" />
+            android:hint="Reminder Title"
+            android:inputType="text" />
 
-        <EditText
+        <TextView
             android:id="@+id/addReminderTime"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:inputType="time"
-            android:hint="Reminder Time"/>
+            android:background="?android:attr/selectableItemBackground"
+            android:gravity="center_vertical"
+            android:hint="Reminder Time"
+            android:padding="10dp"
+            android:textColor="@android:color/black" />
 
         <EditText
             android:id="@+id/addReminderDay"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:inputType="text"
-            android:hint="Reminder Day" />
+            android:hint="Reminder Day"
+            android:inputType="text" />
 
         <EditText
             android:id="@+id/addReminderLocation"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:inputType="text"
-            android:hint="Reminder Location" />
+            android:hint="Reminder Location"
+            android:inputType="text" />
 
         <Button
             android:id="@+id/addReminder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add Reminder" />
+            android:backgroundTint="@color/agri_green"
+            android:text="Add Reminder"
+            android:layout_gravity="center"/>
     </LinearLayout>
 
 </FrameLayout>

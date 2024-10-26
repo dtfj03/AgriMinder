@@ -2,4 +2,6 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="agri_green">#A6B37D</color>
+    <color name="agri_brown">#B99470</color>
 </resources>

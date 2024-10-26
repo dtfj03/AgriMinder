@@ -11,4 +11,9 @@
     <item android:id="@+id/menu_calendar"
         android:title="Calendar"
         android:icon="@drawable/baseline_calendar_month_24" />
+    <item android:id="@+id/menu_batch"
+        android:title="Batch"
+        android:icon="@drawable/menu_batch_icon"
+        />
+
 </menu>
