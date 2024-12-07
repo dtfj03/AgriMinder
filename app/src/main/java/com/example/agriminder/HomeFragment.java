@@ -1,64 +1,88 @@
 package com.example.agriminder;
 
+import android.database.Cursor;
+import android.graphics.Paint;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import androidx.fragment.app.Fragment;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link HomeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class HomeFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private ReminderDatabase reminderDatabase;
+    private LinearLayout homeReminderLayout;
 
     public HomeFragment() {
         // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static HomeFragment newInstance(String param1, String param2) {
-        HomeFragment fragment = new HomeFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        // Initialize database and layout
+        reminderDatabase = new ReminderDatabase(getContext());
+        homeReminderLayout = view.findViewById(R.id.home_reminder2);
+
+        // Load reminders from database
+        loadReminders();
+
+        return view;
+    }
+
+    private void loadReminders() {
+        // Clear existing views
+        homeReminderLayout.removeAllViews();
+
+        // Retrieve all reminders from database
+        Cursor cursor = reminderDatabase.getAllData();
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                // Ensure columns are available
+                int titleIndex = cursor.getColumnIndex(ReminderDatabase.COL_REMINDER_TITLE);
+                int timeIndex = cursor.getColumnIndex(ReminderDatabase.COL_REMINDER_TIME);
+
+                if (titleIndex == -1 || timeIndex == -1) continue; // Skip if columns are missing
+
+                // Get reminder details from cursor
+                String title = cursor.getString(titleIndex);
+                String time = cursor.getString(timeIndex);
+
+                // Inflate a new reminder item layout
+                View reminderItemView = LayoutInflater.from(getContext()).inflate(R.layout.reminder_item, homeReminderLayout, false);
+
+                // Set reminder title and time
+                TextView reminderTitle = reminderItemView.findViewById(R.id.reminderTitleTextView);
+                TextView reminderTime = reminderItemView.findViewById(R.id.reminderTimeTextView);
+                reminderTitle.setText(title);
+                reminderTime.setText(time);
+
+                // Handle checkbox for marking as done
+                CheckBox checkBox = reminderItemView.findViewById(R.id.reminderCheckBox);
+                checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                    if (isChecked) {
+                        // Strike-through text to indicate completion
+                        reminderTitle.setPaintFlags(reminderTitle.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                        reminderTime.setPaintFlags(reminderTime.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                    } else {
+                        // Remove strike-through if unchecked
+                        reminderTitle.setPaintFlags(reminderTitle.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
+                        reminderTime.setPaintFlags(reminderTime.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
+                    }
+                });
+
+                // Add the reminder item view to the layout
+                homeReminderLayout.addView(reminderItemView);
+
+            } while (cursor.moveToNext());
+
+            cursor.close();
+        }
     }
 }

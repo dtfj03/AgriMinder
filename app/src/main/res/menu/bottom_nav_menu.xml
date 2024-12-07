@@ -15,5 +15,8 @@
         android:title="Batch"
         android:icon="@drawable/menu_batch_icon"
         />
+    <item android:id="@+id/menu_logout"
+        android:title="Logout"
+        android:icon="@drawable/baseline_logout_24" />
 
 </menu>
