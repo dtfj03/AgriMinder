@@ -152,7 +152,7 @@ public class LoginProcess extends AppCompatActivity {
                 if (responseCode == HttpURLConnection.HTTP_OK && success) {
                     SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putBoolean("isLoggedIn", true);
+                    editor.putBoolean("user_login", true);
                     editor.apply();
 
                     Toast.makeText(LoginProcess.this, "Login Successful", Toast.LENGTH_SHORT).show();
