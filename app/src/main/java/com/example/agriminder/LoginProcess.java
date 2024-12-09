@@ -3,6 +3,7 @@ package com.example.agriminder;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -150,15 +151,18 @@ public class LoginProcess extends AppCompatActivity {
                 String message = jsonResponse.optString("message", "Invalid email or password");
 
                 if (responseCode == HttpURLConnection.HTTP_OK && success) {
-                    SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
+                    SharedPreferences sharedPreferences = getSharedPreferences("app_prefs", MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putBoolean("user_login", true);
                     editor.apply();
 
+                    Log.d("SharedPreferences", "Login state saved: " + sharedPreferences.getBoolean("user_login", false));
+
+
                     Toast.makeText(LoginProcess.this, "Login Successful", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginProcess.this, MainActivity.class);
                     startActivity(intent);
-                    finish();
+                    finish(); // Prevents going back to LoginProcess
                 } else {
                     Toast.makeText(LoginProcess.this, message, Toast.LENGTH_SHORT).show();
                 }
